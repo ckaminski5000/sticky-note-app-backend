@@ -9,7 +9,28 @@ const createSticky = catchAsync(async (req, res) => {
     res.status(httpStatus.CREATED).send(sticky);
   });
 
+const getSticky = catchAsync(async (req, res) => {
+  const sticky = await stickyService.getStickyById(req.params.id);
+  console.log('req.params.id', req.params.id);
+  if(!sticky){
+    throw new ApiError(httpStatus.NOT_FOUND, 'Sticky not found');
+  }
+  res.send(sticky);
+})
+
+const updateSticky = catchAsync(async (req, res) => {
+  const sticky = await stickyService.updateStickyById(req.params.id, req.body);
+  res.send(sticky);
+})
+
+const deleteSticky = catchAsync(async (req, res) => {
+  await stickyService.deleteStickyById(req.params.id);
+  res.status(httpStatus.NO_CONTENT).send();
+})
 
   module.exports = {
-    createSticky
+    createSticky,
+    deleteSticky,
+    updateSticky,
+    getSticky
   }

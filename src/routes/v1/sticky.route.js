@@ -5,10 +5,14 @@ const stickyController = require('../../controllers/sticky.controller');
 const stickyValidation = require('../../validations/sticky.validation');
 
 const router = express.Router();
+// need to create a get, update and delete
 
 router.route('/')
     .post(auth('createSticky'), validate(stickyValidation.createSticky), stickyController.createSticky);
 
-
+router.route('/:id')
+    .get(validate(stickyValidation.getSticky), stickyController.getSticky)
+    .put(validate(stickyValidation.updateSticky), stickyController.updateSticky)
+    .delete(validate(stickyValidation.deleteSticky), stickyController.deleteSticky)
 
 module.exports = router;
