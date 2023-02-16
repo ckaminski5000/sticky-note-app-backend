@@ -13,6 +13,10 @@ router.route('/')
 router.route('/:id')
     .get(validate(stickyValidation.getSticky), stickyController.getSticky)
     .put(validate(stickyValidation.updateSticky), stickyController.updateSticky)
-    .delete(validate(stickyValidation.deleteSticky), stickyController.deleteSticky)
+    .delete(validate(stickyValidation.deleteSticky), stickyController.deleteSticky);
+
+router.route('/all/:User_id')
+    .get(validate(stickyValidation.getStickies), stickyController.getStickiesbyUser);
+
 
 module.exports = router;
